@@ -7,23 +7,28 @@ struct List
     List *next;
 };
 
-void CreateList(List **beg, List **end);
+void CreateList(List **beg, List **end, const int data = 0);
+void PushBack(List* end);
+void PushFront(List *beg);
 
 int main()
-{
+{       
     List *beg;
     List *end;
-    for (size_t i = 0; i < 10; i++)
-    {
-        std::cout << i;
-    }
+    CreateList(&beg, &end);
+    std::cout << "End\n";
+
     
 }
 
-void CreateList(List **beg, List **end)
+void CreateList(List **beg, List **end, const int data)
 {
-    *beg = new List;
-    *end = new List;
+    List* temp = new List;
+    temp->data = data;
+    *beg = *end = temp;
+}
 
+void PushBack(List* end)
+{
 
 }

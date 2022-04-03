@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdio>
 
 struct List
 {
@@ -8,27 +9,45 @@ struct List
 };
 
 void CreateList(List **beg, List **end, const int data = 0);
-void PushBack(List* end);
-void PushFront(List *beg);
+void PushBack(List **end, const int data = 0);
+void PushFront(List *beg, const int data = 0);
+
+void PrintBack(List *end);
+void PrintFront(List *beg);
 
 int main()
-{       
+{
     List *beg;
     List *end;
-    CreateList(&beg, &end);
+    CreateList(&beg, &end, 5);
+    PushBack(&end, 10);
     std::cout << "End\n";
-
-    
+    PrintBack(end);
 }
 
-void CreateList(List **beg, List **end, const int data)
+void PrintBack(List *end)
 {
-    List* temp = new List;
+    List* temp = end;
+    while(temp != NULL)
+    {
+        printf("%d%c", temp->data, '\n');
+        temp = temp->next;
+    }
+    printf((const char*)'\n');
+}
+
+    void CreateList(List **beg, List **end, const int data)
+{
+    List *temp = new List;
     temp->data = data;
+    temp->next = temp->prev = NULL;
     *beg = *end = temp;
 }
 
-void PushBack(List* end)
+void PushBack(List **end, const int data)
 {
-
+    List *temp = new List;
+    temp->data = data;
+    temp->next = *end;
+    *end = temp;
 }
